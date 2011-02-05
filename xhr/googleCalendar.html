@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script>
+        var myService;
+        var feedUrl = "https://www.google.com/calendar/feeds/2c2shjdpkk03t4on4gqtal9qijchojrg@import.calendar.google.com/public/full";
+        
+        function setupMyService() {
+          myService = new google.gdata.calendar.CalendarService('exampleCo-exampleApp-1');
+        }
+        
+        function getMyFeed() {
+          setupMyService();         
+          myService.getEventsFeed(feedUrl, handleMyFeed, handleError);
+        }
+        
+        function handleMyFeed(myResultsFeedRoot) {
+          document.body.innerHTML ='<pre>' + myResultsFeedRoot.feed + '</pre>';
+          //alert("This feed's title is: " + myResultsFeedRoot.feed.getTitle().getText());
+        }
+        
+        function handleError(e) {
+          alert("There was an error!");
+          alert(e.cause ? e.cause.statusText : e.message);
+        }
+        
+        google.load('gdata', '1');
+        google.setOnLoadCallback(getMyFeed);
+    </script>
+</head>
+<body>
+</body>
+</html>

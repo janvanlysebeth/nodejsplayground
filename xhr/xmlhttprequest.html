@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script>
+        var myService;
+        var feedUrl = "https://www.google.com/calendar/feeds/2c2shjdpkk03t4on4gqtal9qijchojrg@import.calendar.google.com/public/full";
+        
+        function get(url, handler) {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.send(handler);
+        }
+        
+        get(feedUrl, function(xhr) {
+            document.body.innerHTML = '<pre>' + xhr.responseText + '</pre>';
+        });
+        
+    </script>
+</head>
+<body>
+</body>
+</html>
