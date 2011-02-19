@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script>        
+        function inject() {
+            var iframeDoc = document.getElementById('googleFrame').contentDocument;
+            alert(iframeDoc);
+            var scriptElement = iframeDoc.createElement('script');
+            scriptElement.innerHTML = document.getElementById('scriptToInject').innerHTML
+                + "\n requestFeed()";            
+            var iframeHead = iframeDoc.getElementsByTagName('head')[0];
+            iframeHead.appenChild(scriptElement);
+        }
+    </script>
+    <script id='scriptToInject'>
+        var feedUrl = "https://www.google.com/calendar/feeds/2c2shjdpkk03t4on4gqtal9qijchojrg@import.calendar.google.com/public/full";
+        function get(url, handler) {
+            xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.send(handler);
+        }
+        
+        function requestFeed() {        
+            get(feedUrl, function(xhr) {
+                document.body.innerHTML = '<pre>' + xhr.responseText + '</pre>';
+            });
+        }   
+    </script>
+</head>
+<body>
+Execute a cross domain xhr by using an iframe.
+<button onclick='inject()'>inject javascript</button>
+<div>
+    <iframe id='googleFrame' src='http://www.google.com' width='100%' height='100%'><iframe>
+</div>
+</body>
+</html>
