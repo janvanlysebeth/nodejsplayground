@@ -1,0 +1,28 @@
+html,body{
+    margin:0;
+	padding:0;
+	height:100%;
+	border:none
+}
+
+table.chessboard td {
+    height: 100px;
+    width: 100px;
+    
+    /*border: solid;
+    border-width: 1px;*/
+}
+
+.piece {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.white {
+    background-color: #f0d9b5;
+}
+
+.black {
+    background-color: #b58863;
+}
