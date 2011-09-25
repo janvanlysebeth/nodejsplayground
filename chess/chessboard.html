@@ -4,7 +4,14 @@
     <link rel="stylesheet" type="text/css" href="chess.css"/>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.5.1.js"></script>
     <script type="text/javascript" src="chess.js"></script>
+    <script type="text/javascript" src="chessApplication.js"></script>
     <script>
+    $(document).ready(function() {
+        application = new chess.Application();
+        application.init();
+    });
+    
+    
         
     </script>
 </head>
@@ -43,7 +50,7 @@
     <tr id='5'>
         <td class='white' id='a'></td>
         <td class='black' id='b'></td>
-        <td class='white' id='c'><img class='piece' src='http://users.telenet.be/janket/BlackQueen.png'/></td>
+        <td class='white' id='c'><img class='piece' src='images/BlackQueen.png'/></td>
         <td class='black' id='d'></td>
         <td class='white' id='e'></td>
         <td class='black' id='f'></td>
@@ -91,5 +98,6 @@
         <td class='black' id='h'></td>
     </tr>
 </table>
+<input id='newGameButton' type='button' value='New game'/>
 </body>
 </html>
