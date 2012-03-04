@@ -1,60 +1,55 @@
 var chess = {};
 
-chess.Game = function() {
-    this.position = new chess.Position();
-    var self = this;
-    chess.Square.VALID_FILES.forEach(function(file) {
-        self.position.addWhitePawn(file + '2');
-    });
+
+chess.Piece = function() {
+    this.basicName = '';
+    this.isWhite = true;
+    this.square = null;
+    
+    this.name = function() {
+        var color = null;
+        if (this.isWhite) {
+            color = 'White';
+        } else {
+            color = 'Black';
+        }
+        return color + this.basicName;
+    };
 };
 
-chess.Position = function() {
-    this.pieces = new Array(32);
-    this.whiteIsActive = true;
-    this.availableCastlings = 
-        [chess.Position.BLACK_KINGSIDE_CASTLING, 
-        chess.Position.WHITE_QUEENSIDE_CASTLING,
-        chess.Position.BLACK_KINGSIDE_CASTLING,
-        chess.Position.BLACK_QUEENSIDE_CASTLING];
-    this.enPassantTargetSquare = null;
-    
-    this.addPiece = function(aPiece) {
-        this.pieces.push(aPiece);
-    };
-    
-    this.placePieceOnSquare = function(aPiece, aString) {
-        aPiece.square = new chess.Square(aString.charAt(0), aString.charAt(1));
-    };
-    
-    this.addPawnOn = function(aString) {
-        var p = new chess.Pawn();
-        this.addPiece(p);
-        this.placePieceOnSquare(p, aString);
-        return p;
-    };
-    
-    this.addWhitePawn = function(aString) {
-        var p = this.addPawnOn(aString);
-        p.isWhite = true;
-    };
-    
-    this.pieceAt = function(aString) {
-        var file = aString.charAt(0);
-        var rank = aString.charAt(1);
-        var piece = null;
-        this.pieces.forEach(function(aPiece){
-            if (aPiece.square.rank == rank && aPiece.square.file == file) {
-                piece = aPiece;
-            }
-        });
-        return piece;
-    };        
+chess.Pawn = function() {
+    this.basicName = 'Pawn';
 };
+chess.Pawn.inheritsFrom(chess.Piece);
 
-chess.Position.WHITE_KINGSIDE_CASTLING = 1;
-chess.Position.WHITE_QUEENSIDE_CASTLING = 2;
-chess.Position.BLACK_KINGSIDE_CASTLING = 4;
-chess.Position.BLACK_QUEENSIDE_CASTLING = 8;
+chess.Knight = function() {
+    this.basicName = 'Knight';
+};
+chess.Knight.inheritsFrom(chess.Piece);
+
+chess.Bishop = function() {
+    this.basicName = 'Bishop';
+};
+chess.Bishop.inheritsFrom(chess.Piece);
+
+chess.Rook = function() {
+    this.basicName = 'Rook';
+};
+chess.Rook.inheritsFrom(chess.Piece);
+
+chess.Queen = function() {
+    this.basicName = 'Queen';
+};
+chess.Queen.inheritsFrom(chess.Piece);
+
+chess.King = function() {
+    this.basicName = 'King';
+};
+chess.King.inheritsFrom(chess.Piece);
+
+
+
+
 
 
 chess.Square = function(aChar, anInt) {
@@ -81,12 +76,70 @@ chess.Square = function(aChar, anInt) {
 chess.Square.VALID_RANKS = ['1', '2', '3', '4', '5', '6', '7', '8'];
 chess.Square.VALID_FILES = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'];
 
-chess.Piece = function() {
-    this.isWhite = true;
-    this.square = null;
+chess.Position = function() {
+    this.pieces = new Array(32);
+    this.whiteIsActive = true;
+    this.availableCastlings = 
+        [chess.Position.BLACK_KINGSIDE_CASTLING, 
+        chess.Position.WHITE_QUEENSIDE_CASTLING,
+        chess.Position.BLACK_KINGSIDE_CASTLING,
+        chess.Position.BLACK_QUEENSIDE_CASTLING];
+    this.enPassantTargetSquare = null;
+    
+    this.placePieceOnSquare = function(aPiece, aString) {
+        aPiece.square = new chess.Square(aString.charAt(0), aString.charAt(1));
+    };
+    
+    this.addPiece = function(aPiece, aString, aBoolean) {
+        this.pieces.push(aPiece);
+        aPiece.isWhite = aBoolean;
+        this.placePieceOnSquare(aPiece, aString);
+        return aPiece;
+    };
+    
+    this.pieceAt = function(aString) {
+        var file = aString.charAt(0);
+        var rank = aString.charAt(1);
+        var piece = null;
+        this.pieces.forEach(function(aPiece){
+            if (aPiece.square.rank == rank && aPiece.square.file == file) {
+                piece = aPiece;
+            }
+        });
+        return piece;
+    };        
 };
 
-chess.Pawn = function() {
-    this.image = 'Pawn';
+
+
+
+chess.Game = function() {
+    this.position = new chess.Position();
+    var pos = this.position;
+    chess.Square.VALID_FILES.forEach(function(file) {
+        pos.addPiece(new chess.Pawn(), file + '2', true);
+        pos.addPiece(new chess.Pawn(), file + '7', false);
+    });
+    pos.addPiece(new chess.Rook(), 'a1', true);
+    pos.addPiece(new chess.Knight(), 'b1', true);
+    pos.addPiece(new chess.Bishop(), 'c1', true);
+    pos.addPiece(new chess.Queen(), 'd1', true);
+    pos.addPiece(new chess.King(), 'e1', true);
+    pos.addPiece(new chess.Bishop(), 'f1', true);
+    pos.addPiece(new chess.Knight(), 'g1', true);
+    pos.addPiece(new chess.Rook(), 'h1', true);
+    
+    pos.addPiece(new chess.Rook(), 'a8', false);
+    pos.addPiece(new chess.Knight(), 'b8', false);
+    pos.addPiece(new chess.Bishop(), 'c8', false);
+    pos.addPiece(new chess.Queen(), 'd8', false);
+    pos.addPiece(new chess.King(), 'e8', false);
+    pos.addPiece(new chess.Bishop(), 'f8', false);
+    pos.addPiece(new chess.Knight(), 'g8', false);
+    pos.addPiece(new chess.Rook(), 'h8', false);
 };
-$.extend(chess.Pawn, chess.Piece);
+
+chess.Position.WHITE_KINGSIDE_CASTLING = 1;
+chess.Position.WHITE_QUEENSIDE_CASTLING = 2;
+chess.Position.BLACK_KINGSIDE_CASTLING = 4;
+chess.Position.BLACK_QUEENSIDE_CASTLING = 8;

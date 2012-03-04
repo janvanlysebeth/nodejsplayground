@@ -6,6 +6,7 @@ chess.Application = function() {
         $('#newGameButton').click(function() {
             self.newGame();
         });
+        this.newGame();
     };
     
     this.newGame = function() {
@@ -26,12 +27,12 @@ chess.Application = function() {
             chess.Square.VALID_FILES.forEach(function(file) {
                 var squareString = file + rank;
                 var piece = aPosition.pieceAt(squareString);
+                var imgHtml = "";
                 if (piece) {
-                    $("#" + squareString).html(
-                        "<img class='piece' src='images/BlackQueen.png'/>");
-                } else {
-                    $("#" + squareString).html("");
-                }
+                    imgHtml = "<img class='piece' src='images/" +
+                        piece.name() + ".png'/>";
+                } 
+                $("#" + squareString).html(imgHtml);
             });
         });
     };
