@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        netscape.security.PrivilegeManager.enablePrivilege("UniversalBrowserRead");
+        var xmlhttp = XMLHttpRequest;
+        xmlhttp.onreadystatechange = function() {
+        if(xmlhttp.readyState == 4){
+            alert(xmlhttp.readyState);
+        }}
+        
+        xmlhttp.open("GET","http://www.google.be",true);
+        xmlhttp.send(null);
+    </script>
+</head>
+<body>
+</body>
+Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+</html>
