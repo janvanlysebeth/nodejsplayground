@@ -5,7 +5,7 @@ define("chessApplication", ["chess"],
             
             this.init = function() {
                 var self = this;
-                loadHtml("chessApplication.phtml", 'chessApplication',
+                loadHtml("chessBoard.phtml", 'chessBoard',
                     function() {                        
                         $('newGameButton').click = function() {
                             self.newGame();

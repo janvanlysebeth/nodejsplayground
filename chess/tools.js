@@ -1,4 +1,4 @@
-(function () {
+(function (exports) {
 
 Function.prototype.inheritsFrom = function( parentClassOrObject ){ 
     if ( parentClassOrObject.constructor == Function ) { 
@@ -63,7 +63,7 @@ Async.map = function(anArray, iterator, callback) {
         });
 };
 
-window.Async = Async;
+exports.Async = Async;
 
 (function() {
     var loadingModules = {};
@@ -120,7 +120,7 @@ window.Async = Async;
         });
     }
     
-    window.define = define;
-    window.require = require;
+    exports.define = define;
+    exports.require = require;
 })();
-})();
+})(window);
