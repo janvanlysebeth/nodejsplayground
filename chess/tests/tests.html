@@ -6,7 +6,10 @@
     <script type="text/javascript" src="../tools.js"></script>
     
     
-    <script>    
+    <script>
+        Apart.root = '../';
+        QUnit.stop();
+        
         function parseRequestParameters(aString) { "the query string of the url"
             var queryStringParams = aString.slice(1).split("&");
             var requestParams = {};
@@ -19,16 +22,14 @@
         
         function loadTests() {
             var params = parseRequestParameters(window.location.search);
-            if (params.tests) {
-                var s = window.document.createElement('script');
-                s.src = params.tests + '.js';
-                window.document.head.appendChild(s);
-            }
+            Apart.define("main", [params.tests], function() {
+                    QUnit.start();
+            });
         }
     </script>
 </head>
 <body onload='loadTests()'>
-    <h1 id="qunit-header">QUnit - tools.js</h1>
+    <h1 id="qunit-header">QUnit</h1>
     <h2 id="qunit-banner"></h2>
     <div id="qunit-testrunner-toolbar"></div>
     <ol id="qunit-tests"></ol>

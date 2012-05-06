@@ -1,4 +1,4 @@
-define("chess", function() {
+Apart.define("chess", function() {
     var chess = {};    
     
     chess.Piece = function() {

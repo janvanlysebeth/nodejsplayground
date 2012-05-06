@@ -1,4 +1,4 @@
-require(['chessApplication'], function(chessApplication) {
+Apart.require(['chessApplication'], function(chessApplication) {
     var app = new chessApplication();
     app.init();
 });

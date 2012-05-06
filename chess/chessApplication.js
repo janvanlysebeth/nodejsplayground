@@ -1,4 +1,4 @@
-define("chessApplication", ["chess"], 
+Apart.define("chessApplication", ["chess"], 
     function(chess) {
         return function ChessApplication() {
             this.game = null;

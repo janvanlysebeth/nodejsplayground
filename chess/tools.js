@@ -66,8 +66,9 @@ Async.map = function(anArray, iterator, callback) {
 exports.Async = Async;
 
 (function() {
-    var loadingModules = {};
-    var loadedModules = {};
+    var Apart = {};
+    var loadingModules = Apart.loadingModules = {};
+    var loadedModules = Apart.loadedModules = {};
         
     function load(aDependency, finishedCallback) {
         if (loadedModules[aDependency] !== undefined) {
@@ -76,6 +77,13 @@ exports.Async = Async;
         }
         if (loadingModules[aDependency] === undefined) { 
             loadingModules[aDependency] = finishedCallback;
+            var s = window.document.createElement('script');
+            if (Apart.root) {
+               s.src = Apart.root + aDependency + '.js'; 
+            } else {
+                s.src = aDependency + '.js';
+            }
+            window.document.head.appendChild(s);
         } else {
             var tmp = loadingModules[aDependency];
             loadingModules[aDependency] = function(error, mappingResult) {
@@ -83,9 +91,6 @@ exports.Async = Async;
                 finishedCallback(error, mappingResult);
             };
         }
-        var s = window.document.createElement('script');
-        s.src = aDependency + '.js';
-        window.document.head.appendChild(s);
     }
     
     
@@ -120,7 +125,8 @@ exports.Async = Async;
         });
     }
     
-    exports.define = define;
-    exports.require = require;
+    Apart.define = define;
+    Apart.require = require;
+    exports.Apart = Apart;
 })();
 })(window);
