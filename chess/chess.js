@@ -107,7 +107,16 @@ Apart.define("chess", function() {
                 }
             });
             return piece;
-        };        
+        };
+      
+      	this.movePieceFromToCoordinate = function(aString, anotherString) {
+          	var toSquare = new chess.Square(anotherString.charAt(0), anotherString.charAt(1));
+          	this.makeMove(this.pieceAt(aString), toSquare);        
+        };
+      
+      	this.makeMove = function(aPiece, aSquare) {
+            aPiece.square = aSquare;
+        };
     };
     
     

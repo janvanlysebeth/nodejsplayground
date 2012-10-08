@@ -5,7 +5,7 @@ html,body{
 	border:none
 }
 
-.chessboard td {
+.chessboardTable td {
     height: 100px;
     width: 100px;
     
