@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style type="text/css">
+    .popup {
+      display: none;
+      position: absolute;
+      background: #F4EFCA
+    }      
+  </style>
+  <script>
+    function showDiv(divID, show) {
+		var w=document.getElementById(divID); 
+		w.style.display=(show==1)?'block':'none'; 
+	}
+  </script>
+<body>
+  <p onclick="showDiv('div1', 1)">a paragraph</p>
+  <div id="div1" class="popup">popup</div>
+  <p>another paragraph</p>
+</body>
+</html>

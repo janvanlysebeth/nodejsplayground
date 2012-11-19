@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style type="text/css">
+    div#log{
+      border-style: solid;
+    }
+  </style>
+  <script>
+    
+  function setup() {
+  	listenForKeyEventsFor(document.getElementById('ta'));
+  	listenForKeyEventsFor(document.getElementById('menu'));
+    focusElementOnMouseOver(document.getElementById('menu'));
+  	listenForKeyEventsFor(document.getElementById('menuItem2'));
+    focusElementOnMouseOver(document.getElementById('menuItem2'));
+  }
+    
+  function focusElementOnMouseOver(anElement) {
+    anElement.addEventListener("mouseover", function(e) {anElement.focus()});
+    anElement.addEventListener("mouseout", function(e) {anElement.blur()});
+  }
+    
+  function listenForKeyEventsFor(anElement) {  
+    function printEvent(event) {
+      var div = document.getElementById('log');
+      div.innerHTML = JSON.stringify(
+        {"type": event.type,
+         "altKey": event.altKey,
+         "ctrlKey": event.ctrlKey,
+         "shiftKey": event.shiftKey,
+         "charCode": event.charCode,
+         "keyCode": event.keyCode,
+         "target": event.target.toString()
+        }) + '<br>' + div.innerHTML;
+    }      
+    anElement.addEventListener("keypress", printEvent);
+    anElement.addEventListener("keyup", printEvent);
+    anElement.addEventListener("keydown", printEvent);
+  }
+  </script>
+<body onload="setup()">
+  <div id="menu" tabindex="0">
+    <div id="menuItem1">item1</div>
+    <div id="menuItem2" tabindex="1">item2</div>
+    <div id="menuItem3">item3</div>
+  </div>
+  <form>
+    <textarea id="ta"></textarea>
+  </form>
+  <div id="log">events:</div>
+</body>
+</html>

@@ -6,7 +6,6 @@ Apart.define("chessApplication", ["raw@chessBoard.phtml", "chess"], function(che
     
   ChessApplication.prototype.init = function() {
     var self = this;
-    self.selection = new Selection();
     $('chessboard').innerHTML = chessBoardTemplate;
 	$('newGameButton').click = function() {
        self.newGame();
@@ -31,6 +30,7 @@ Apart.define("chessApplication", ["raw@chessBoard.phtml", "chess"], function(che
       return null;
     }
     this.game = new chess.Game();
+    this.selection = new Selection();
     this.displayPosition(this.game.position);
     return this.game;
   };
