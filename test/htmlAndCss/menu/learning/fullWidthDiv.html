@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style type="text/css">
+    body {
+      padding: 0px;
+      margin: 0px;
+    }
+    
+    .fullWidth {
+      width: 100%;
+      background: #F4EFCA;
+      border: 0px;
+      padding-top: 0px;
+      padding-bottom: 10px;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin: 0px
+    }
+    
+    .fullWidth div {
+      padding: 8px;    
+    }
+    
+    .padded {
+      padding: 8px;
+    }
+  </style>
+  <script>
+    
+  </script>
+<body>
+  <div class="fullWidth">
+    	<!--	
+			Extra div needed otherwise a horizontal scroll bar appears.
+			Adding padding to fullWidth div makes the size of it bigger than 100%.
+			http://www.quirksmode.org/css/box.html
+		-->
+    	<div>menu</div>
+  </div>
+  <div class="padded">bla
+  	<p>another paragraph</p>
+  </div>
+</body>
+</html>

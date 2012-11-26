@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <style type="text/css">
+    body {
+      padding: 0px;
+      margin: 0px;
+    }
+    
+    .fullWidth {
+      width: 100%;
+      background: #F4EFCA;
+      border: 0px;
+      padding-top: 0px;
+      padding-bottom: 10px;
+      padding-right: 0px;
+      padding-left: 0px;
+      margin: 0px
+    }
+    
+    .fullWidth div {
+      padding: 4px;    
+    }
+    
+    .menu span {
+      margin: 16px;
+    }
+    
+    .padded {
+      padding: 8px;
+    }
+  </style>
+  <script src="underscore.js"></script>
+  <script src="zepto.js"></script>
+  <script src="backbone.js"></script>
+  <script src="apart.js"></script>
+  <script>
+    function start($) {  
+    	Apart.define('MenuView', function() {
+      		return Backbone.View.extend({
+	        	el: $('#menuBar'),
+        
+    	    	events: {
+      				'click span#fileMenuItem': 'toggelFileMenu'
+    			},
+        
+   				initialize: function(){
+      				_.bindAll(this, 'render', 'toggelFileMenu'); // every function that uses 'this' as the current object should be in here
+     
+    	 			this.render();
+    			},
+       	 
+        		render: function() {
+          			$(this.el)
+            			.append("<span id='fileMenuItem'>File</span>")
+            			.append("<span id='executeMenuItem'>Execute</span>");
+	        	},
+    	    
+        		toggelFileMenu: function(){
+          			alert('hello world');
+	        	}
+    		}); 
+        });
+      
+        Apart.require(['MenuView'], function(MenuView) {
+            var menuView = new MenuView();
+        });
+	}
+  </script>
+<body onload="start(Zepto)">
+  <div class="fullWidth">
+    <div id="menuBar" class="menu"></div>
+  </div>
+  <div class="padded">bla
+  	<p>another paragraph</p>
+  </div>
+</body>
+</html>
